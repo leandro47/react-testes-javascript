@@ -31,20 +31,51 @@
 
     <script type="text/babel">
 
-        function Tempo() {
-            // jsx a apresentar
-            const conteudo = (
-                <div>
-                    <h3>Tempo atual</h3>
-                    <p>Estamos na seguinte hora : {new Date().toLocaleTimeString()}</p>
-                </div>
-            )
-            ReactDOM.render(
-                conteudo, document.getElementById('root')
-            )
+        class App extends React.Component {
+
+            render() {
+                return (
+
+                    <div>
+                        <h2>Exercicio</h2>
+                        <hr />
+                        <Formulario nome="Leandro" sobreNome="Silva" />
+                        <Formulario nome="Ana" sobreNome="Messias" />
+                        <Formulario nome="Pedro" sobreNome="Silveira" />
+                    </div>
+                )
+            }
         }
 
-        setInterval(Tempo, 1000);
+        class Formulario extends React.Component {
+
+            constructor(props) {
+                super(props)
+                this.state = {
+                    nome: this.props.nome
+                }
+
+                this.cmd_click = this.cmd_click.bind(this)
+            }
+            cmd_click() {
+                this.setState({ nome: this.props.sobreNome })
+            }
+
+            render() {
+                return (
+                    <div>
+                        <p>Nome: {this.state.nome}</p>
+                        <button onClick={this.cmd_click}>Alterar</button>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <App />,
+            document.getElementById('root')
+        );
+
     </script>
 </body>
 
